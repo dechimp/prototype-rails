@@ -14,7 +14,7 @@ ActionView::Base.class_eval do
   include ActionView::Helpers::ScriptaculousHelper
 end
 
-if defined? ActionView::TestCase
+if defined?(Rails.env) && Rails.env.test?
   ActionView::TestCase.class_eval do
     include ActionView::Helpers::PrototypeHelper
     include ActionView::Helpers::ScriptaculousHelper
