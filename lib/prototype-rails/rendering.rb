@@ -1,15 +1,13 @@
 require 'action_view/helpers/rendering_helper'
 
-module RenderWithUpdate
-  def render(options = {}, locals = {}, &block)
+ActionView::Helpers::RenderingHelper.module_eval do
+  def render_with_update(options = {}, locals = {}, &block)
     if options == :update
       update_page(&block)
     else
-      super(options, locals, &block)
+      render_without_update(options, locals, &block)
     end
   end
-end
-
-ActionView::Helpers::RenderingHelper.module_eval do
-  prepend RenderWithUpdate
+  
+  alias_method_chain :render, :update
 end
