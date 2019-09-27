@@ -1,6 +1,7 @@
 require 'abstract_unit'
 require 'controller/fake_models'
 require 'active_support/core_ext/hash/conversions'
+require 'responders'
 
 class RespondToController < ActionController::Base
   layout :set_layout
@@ -196,7 +197,7 @@ protected
   end
 
   def _render_js(js, options)
-    self.content_type ||= Mime::JS
+    self.content_type ||= Mime[:js]
     self.response_body = js.respond_to?(:to_js) ? js.to_js : js
   end
 end
